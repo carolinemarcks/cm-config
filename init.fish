@@ -15,7 +15,6 @@ alias lb0="ssh 199.27.131.2 -p 6656"
 alias livesync="~/projects/workstation-sync/sync.sh --live"
 
 # functions
-
 function coverme 
   set -l user carolinem
   set -l project $argv[1]
@@ -24,3 +23,6 @@ function coverme
   ; and open ~/projects/meetup-coverage/index.html
 end
 
+function fish_user_key_bindings
+  bind -M insert -m default jj force-repaint
+end
