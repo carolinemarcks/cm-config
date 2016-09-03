@@ -4,7 +4,7 @@ setup () {
 	local dotfile="$1"
 	if [ -e ~/.$dotfile ]; then
 		local ver1=`md5 -q ~/.$dotfile`
-		local ver2=`md5 -q $dotfile`
+		local ver2=`md5 -q ~/projects/cm-dotfiles/$dotfile`
 		if [ ! "$ver1" = "$ver2" ]; then
 			local millis=`date +%s`
 			local newname=".$dotfile-$millis"
@@ -12,7 +12,7 @@ setup () {
 			mv ~/.$dotfile ~/$newname
 		fi
 	fi
-	cp $dotfile ~/.$dotfile
+	cp ~/projects/cm-dotfiles/$dotfile ~/.$dotfile
 }
 
 
@@ -22,6 +22,14 @@ fi
 
 if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
 	git clone git://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions 
+fi
+
+if [ ! -d ~/.oh-my-zsh/custom/themes ]; then
+	mkdir ~/.oh-my-zsh/custom/themes 
+fi
+
+if [ ! -e ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme ]; then
+	echo "GET THE CUSTOM THEME" #todo version control this
 fi
 
 setup zshrc
