@@ -1,12 +1,6 @@
 #!/bin/sh
 
-if [ ! -d ~/.oh-my-zsh ]; then
-	#do vimrc check first?
-	echo "installing oh-my-zsh.  please re-run setup.sh afterwards"
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
-
-archive () {
+setup () {
 	local dotfile="$1"
 	if [ -e ~/.$dotfile ]; then
 		local ver1=`md5 -q ~/.$dotfile`
@@ -21,8 +15,13 @@ archive () {
 	cp $dotfile ~/.$dotfile
 }
 
-archive screenrc
-archive vimrc
-archive zshrc
 
-echo "done"
+if [ ! -d ~/.oh-my-zsh ]; then
+	git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+fi
+
+setup zshrc
+setup screenrc
+setup vimrc
+
+echo "Setup complete!"
