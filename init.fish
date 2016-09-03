@@ -13,8 +13,14 @@ brew doctor
 alias devbox="ssh carolinem@carolinem.dev.meetup.com"
 alias lb0="ssh 199.27.131.2 -p 6656"
 alias livesync="~/projects/workstation-sync/sync.sh --live"
+alias meetup="cd ~/projects/meetup"
+alias dotfiles="vim ~/projects/cm-dotfiles/"
 
 # functions
+function dotfile
+  vim ~/projects/cm-dotfiles/$argv[1]
+end
+
 function coverme 
   set -l user carolinem
   set -l project $argv[1]
@@ -26,3 +32,4 @@ end
 function fish_user_key_bindings
   bind -M insert -m default jj force-repaint
 end
+
