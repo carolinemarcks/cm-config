@@ -20,6 +20,10 @@ if [ ! -d ~/.oh-my-zsh ]; then
 	git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 fi
 
+if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
+	git clone git://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions 
+fi
+
 setup zshrc
 setup screenrc
 setup vimrc
