@@ -7,7 +7,7 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="clean"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -83,3 +83,31 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+dotfile () {
+	vim ~/projects/cm-dotfiles/$1
+	update-dotfiles
+}
+
+update-dotfiles () {
+	cp ~/projects/cm-dotfiles/vimrc ~/.vimrc
+	cp ~/projects/cm-dotfiles/screenrc ~/.screenrc
+	cp ~/projects/cm-dotfiles/zshrc ~/.zshrc
+}
+
+
+dotfile-diff () {
+	if (( $# == 1 )) 
+	then 
+		echo "diffing: $1"	
+		diff ~/projects/cm-dotfiles/$1 ~/.$1
+	else
+		echo "dotfile-diff only accepts one arg"
+	fi
+}
+
+dotfile-diffs () {
+	dotfile-diff vimrc
+	dotfile-diff screenrc
+	dotfile-diff zshrc
+}
