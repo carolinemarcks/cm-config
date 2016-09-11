@@ -28,12 +28,10 @@ if [ ! -d ~/.oh-my-zsh/custom/themes ]; then
 	mkdir ~/.oh-my-zsh/custom/themes 
 fi
 
-if [ ! -e ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme ]; then
-	echo "GET THE CUSTOM THEME" #todo version control this
-fi
-
 setup zshrc
 setup screenrc
 setup vimrc
+
+cp ~/projects/cm-dotfiles/ztheme ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme
 
 echo "Setup complete!"

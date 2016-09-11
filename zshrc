@@ -7,7 +7,7 @@
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="clean"
+ZSH_THEME="cm-zsh-theme"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -95,6 +95,7 @@ update-dotfiles () {
 	cp ~/projects/cm-dotfiles/vimrc ~/.vimrc
 	cp ~/projects/cm-dotfiles/screenrc ~/.screenrc
 	cp ~/projects/cm-dotfiles/zshrc ~/.zshrc
+	cp ~/projects/cm-dotfiles/ztheme ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme
 }
 
 
@@ -112,4 +113,6 @@ dotfile-diffs () {
 	dotfile-diff vimrc
 	dotfile-diff screenrc
 	dotfile-diff zshrc
+	dotfile-diff ztheme
 }
+
