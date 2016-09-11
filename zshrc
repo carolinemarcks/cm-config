@@ -84,8 +84,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias meetup="cd ~/projects/meetup"
-
 dotfile () {
 	vim ~/projects/cm-dotfiles/$1
 	update-dotfiles
