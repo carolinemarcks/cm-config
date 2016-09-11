@@ -84,34 +84,34 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-local -A dotfile_array
-dotfile_array=(vimrc ~/.vimrc screenrc ~/.screenrc zshrc ~/.zshrc ztheme ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme cm-vi-mode/cm-vi-mode.plugin.zsh ~/.oh-my-zsh/custom/plugins/cm-vi-mode/cm-vi-mode.plugin.zsh)
+local -A config_array
+config_array=(vimrc ~/.vimrc screenrc ~/.screenrc zshrc ~/.zshrc ztheme ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme cm-vi-mode/cm-vi-mode.plugin.zsh ~/.oh-my-zsh/custom/plugins/cm-vi-mode/cm-vi-mode.plugin.zsh)
 
-dotfile () {
-	vim ~/projects/cm-dotfiles/$1
-	update-dotfiles
+config () {
+	vim ~/projects/cm-config/$1
+	update-configs
 }
 
-update-dotfiles () {
-	for k in "${(@k)dotfile_array}"; do
-		cp ~/projects/cm-dotfiles/$k $dotfile_array[$k]
+update-configs () {
+	for k in "${(@k)config_array}"; do
+		cp ~/projects/cm-config/$k $config_array[$k]
 	done
 }
 
 
-dotfile-diff () {
+config-diff () {
 	if (( $# == 1 ))
 	then 
 		echo "diffing: $1"
-		diff ~/projects/cm-dotfiles/$1 $dotfile_array[$1]
+		diff ~/projects/cm-config/$1 $config_array[$1]
 	else
-		echo "dotfile-diff only accepts one arg"
+		echo "config-diff only accepts one arg"
 	fi
 }
 
-dotfile-diffs () {
-	for k in "${(@k)dotfile_array}"; do
-		dotfile-diff $k
+config-diffs () {
+	for k in "${(@k)config_array}"; do
+		config-diff $k
 	done
 }
 

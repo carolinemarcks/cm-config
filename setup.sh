@@ -21,16 +21,16 @@ differ () {
 }
 
 setup () {
-	local dotfile="$1"
-	if [ -e ~/.$dotfile ]; then
-		if  differ  ~/.$dotfile  ~/projects/cm-dotfiles/$dotfile; then
+	local config="$1"
+	if [ -e ~/.$config ]; then
+		if  differ  ~/.$config  ~/projects/cm-config/$config; then
 			local millis=`date +%s`
-			local newname=".$dotfile-$millis"
-			echo "~/.$dotfile differs from cm-dotfiles version. archiving to ~/$newname"
-			mv ~/.$dotfile ~/$newname
+			local newname=".$config-$millis"
+			echo "~/.$config differs from cm-config version. archiving to ~/$newname"
+			mv ~/.$config ~/$newname
 		fi
 	fi
-	cp ~/projects/cm-dotfiles/$dotfile ~/.$dotfile
+	cp ~/projects/cm-config/$config ~/.$config
 }
 
 
@@ -51,7 +51,7 @@ setup screenrc
 setup vimrc
 
 #TODO don't overwrite these two when there are diffs
-cp ~/projects/cm-dotfiles/ztheme ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme
-cp -r ~/projects/cm-dotfiles/cm-vi-mode ~/.oh-my-zsh/custom/plugins/cm-vi-mode
+cp ~/projects/cm-config/ztheme ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme
+cp -r ~/projects/cm-config/cm-vi-mode ~/.oh-my-zsh/custom/plugins/cm-vi-mode
 
 echo "Setup complete!"
