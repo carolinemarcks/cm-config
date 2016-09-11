@@ -19,7 +19,8 @@ fi
 
 
 PROMPT='%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}:%{$fg[blue]%}%B%c/%b%{$reset_color%} $(git_prompt_info)%(!.#.$) '
-RPROMPT='$(vi_mode_prompt_info) [%*]'
+RPROMPT='$(vi_mode_prompt_info) [ %* ]'
+ZLE_RPROMPT_INDENT=0 # remove space next to rprompt
 
 # git theming
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}(%{$fg_no_bold[yellow]%}%B"
