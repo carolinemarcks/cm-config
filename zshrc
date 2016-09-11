@@ -84,35 +84,34 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+local -A dotfile_array
+dotfile_array=(vimrc ~/.vimrc screenrc ~/.screenrc zshrc ~/.zshrc ztheme ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme)
+
 dotfile () {
 	vim ~/projects/cm-dotfiles/$1
 	update-dotfiles
 }
 
 update-dotfiles () {
-	cp ~/projects/cm-dotfiles/vimrc ~/.vimrc
-	cp ~/projects/cm-dotfiles/screenrc ~/.screenrc
-	cp ~/projects/cm-dotfiles/zshrc ~/.zshrc
-	cp ~/projects/cm-dotfiles/ztheme ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme
+	for k in "${(@k)dotfile_array}"; do
+		cp ~/projects/cm-dotfiles/$k $dotfile_array[$k]
+	done
 }
 
 
 dotfile-diff () {
-	if (( $# >= 1 ))
+	if (( $# == 1 ))
 	then 
-		local dest=~/.$1
-		if (( $# == 2 )) then; dest=$2; fi
-		echo "diffing: $1"	
-		diff ~/projects/cm-dotfiles/$1 $dest
+		echo "diffing: $1"
+		diff ~/projects/cm-dotfiles/$1 $dotfile_array[$1]
 	else
-		echo "dotfile-diff only accepts one or two args"
+		echo "dotfile-diff only accepts one arg"
 	fi
 }
 
 dotfile-diffs () {
-	dotfile-diff vimrc
-	dotfile-diff screenrc
-	dotfile-diff zshrc
-	dotfile-diff ztheme ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme
+	for k in "${(@k)dotfile_array}"; do
+		dotfile-diff $k
+	done
 }
 
