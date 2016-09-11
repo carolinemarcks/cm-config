@@ -50,6 +50,8 @@ setup zshrc
 setup screenrc
 setup vimrc
 
+#TODO don't overwrite these two when there are diffs
 cp ~/projects/cm-dotfiles/ztheme ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme
+cp -r ~/projects/cm-dotfiles/cm-vi-mode ~/.oh-my-zsh/custom/plugins/cm-vi-mode
 
 echo "Setup complete!"

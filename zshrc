@@ -51,7 +51,7 @@ ZSH_THEME="cm-zsh-theme"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions vi-mode)
+plugins=(git zsh-autosuggestions cm-vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 local -A dotfile_array
-dotfile_array=(vimrc ~/.vimrc screenrc ~/.screenrc zshrc ~/.zshrc ztheme ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme)
+dotfile_array=(vimrc ~/.vimrc screenrc ~/.screenrc zshrc ~/.zshrc ztheme ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme cm-vi-mode/cm-vi-mode.plugin.zsh ~/.oh-my-zsh/custom/plugins/cm-vi-mode/cm-vi-mode.plugin.zsh)
 
 dotfile () {
 	vim ~/projects/cm-dotfiles/$1
