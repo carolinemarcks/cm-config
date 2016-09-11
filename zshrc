@@ -98,12 +98,14 @@ update-dotfiles () {
 
 
 dotfile-diff () {
-	if (( $# == 1 )) 
+	if (( $# >= 1 ))
 	then 
+		local dest=~/.$1
+		if (( $# == 2 )) then; dest=$2; fi
 		echo "diffing: $1"	
-		diff ~/projects/cm-dotfiles/$1 ~/.$1
+		diff ~/projects/cm-dotfiles/$1 $dest
 	else
-		echo "dotfile-diff only accepts one arg"
+		echo "dotfile-diff only accepts one or two args"
 	fi
 }
 
@@ -111,6 +113,6 @@ dotfile-diffs () {
 	dotfile-diff vimrc
 	dotfile-diff screenrc
 	dotfile-diff zshrc
-	dotfile-diff ztheme
+	dotfile-diff ztheme ~/.oh-my-zsh/custom/themes/cm-zsh-theme.zsh-theme
 }
 
