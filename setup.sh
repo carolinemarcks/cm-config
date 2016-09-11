@@ -1,11 +1,29 @@
 #!/bin/sh
 
+differ () {
+	local ver1="ver1"
+	local ver2="ver2"
+	if hash md5 2>/dev/null; then
+		ver1=`md5 -q $1`
+		ver2=`md5 -q $2`
+	elif hash sha334sum 2>/dev/null; then
+		ver1=`sha224sum $1 | cut -d " " -f 1`
+		ver2=`sha224sum $2 | cut -d " " -f 1`
+	else
+		echo "$1 and $2 could not be compared"
+	fi
+
+	if [ "$ver1" = "$ver2" ]; then
+		return 1 # false, they're the same
+	else
+		return 0 # true, they differ
+	fi
+}
+
 setup () {
 	local dotfile="$1"
 	if [ -e ~/.$dotfile ]; then
-		local ver1=`md5 -q ~/.$dotfile`
-		local ver2=`md5 -q ~/projects/cm-dotfiles/$dotfile`
-		if [ ! "$ver1" = "$ver2" ]; then
+		if  differ  ~/.$dotfile  ~/projects/cm-dotfiles/$dotfile; then
 			local millis=`date +%s`
 			local newname=".$dotfile-$millis"
 			echo "~/.$dotfile differs from cm-dotfiles version. archiving to ~/$newname"
