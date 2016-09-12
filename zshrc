@@ -115,5 +115,34 @@ config-diffs () {
 	done
 }
 
+function custom_git_remote_status() {
+	local remote ahead behind custom_git_remote_status 
+	remote=${$(command git rev-parse --verify ${hook_com[branch]}@{upstream} --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
+	if [[ -n ${remote} ]]; then
+		ahead=$(command git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+		behind=$(command git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+
+		if [[ $ahead -eq 0 ]] && [[ $behind -eq 0 ]]; then
+			custom_git_remote_status="$ZSH_THEME_GIT_PROMPT_EQUAL_REMOTE"
+		elif [[ $ahead -gt 0 ]] && [[ $behind -eq 0 ]]; then
+			custom_git_remote_status="$ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE_COLOR$ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE$((ahead))%{$reset_color%}"
+		elif [[ $behind -gt 0 ]] && [[ $ahead -eq 0 ]]; then
+			custom_git_remote_status="$ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE_COLOR$ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE$((behind))%{$reset_color%}"
+		elif [[ $ahead -gt 0 ]] && [[ $behind -gt 0 ]]; then
+			custom_git_remote_status="$ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE_COLOR$ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE$((ahead))%{$reset_color%}$ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE_COLOR$ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE$((behind))%{$reset_color%}"
+		fi
+
+		echo $custom_git_remote_status
+	fi
+}
+function custom_git_prompt_info() {
+	local ref
+	if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
+		ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+			ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+		echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$(custom_git_remote_status)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+	fi
+}
+
 source ~/projects/cm-config/zshrc_devbox
 # YOU ARE NOT ON THE MASTER BRANCH -- GO EDIT THERE 
