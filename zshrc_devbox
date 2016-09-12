@@ -1,0 +1,50 @@
+[[ -f /usr/local/git_repo/meetup-trunk/tools/meetuprc ]] && . /usr/local/git_repo/meetup-trunk/tools/meetuprc
+
+function mf { find /usr/local/meetup/ -name $1; }
+function f { find . -name $1; }
+
+function vf { vim $(find /usr/local/meetup/ \( -name $1.java -o -name $1.scala -o -name $1.py -o -name $1 \) -print; ); }
+alias sbstop='sudo /usr/local/meetup/util/init/devel/switchboardd.sh stop'
+alias sbstart='sudo /usr/local/meetup/util/init/devel/switchboardd.sh start'
+alias sberrors='tail -qF /var/log/switchboardd.log | grep ERROR | /usr/local/meetup/util/devel_scripts/highlight.py'
+alias sblog='tail -qF /var/log/switchboardd.log | /usr/local/meetup/util/devel_scripts/highlight.py'
+alias chaperrors='tail -qF /usr/local/tomcat/logs/chapstick.log | grep ERROR | /usr/local/meetup/util/devel_scripts/highlight.py'
+alias chaplog='tail -qF /usr/local/tomcat/logs/chapstick.log | /usr/local/meetup/util/devel_scripts/highlight.py'
+alias restart='sbstop; sbstart; bounce'
+
+alias ij='./apps/idea-IC-135.1230/bin/idea.sh'
+alias meetup="cd /usr/local/meetup"
+alias antSave="ant 2>&1 | tee lastbuild.txt"
+alias stageSave="ant stage 2>&1 | tee lastbuild.txt"
+source /usr/local/git_repo/meetup-devtools/meetuprc
+
+ssh_agent_list () { find /tmp -type s -uid $UID -name "*agent.*" 2> /dev/null ; }
+
+ssh_agent_reconnect () {
+	unset ideal fallback
+	for i in $(ssh_agent_list) ; do
+		SSH_AUTH_SOCK=${i} ssh-add -l > /dev/null 2>&1
+		case $? in
+			0) ideal=${i}
+				break
+				;;
+			1) fallback=${i}
+				;;
+			2) echo -en .
+				;;
+		esac
+	done
+
+	if [[ -n $ideal ]]; then
+		ln -nsf ${ideal} ~/.ssh/ssh-agent.sock;
+	elif [[ -n $fallback ]]; then
+		ln -nsf ${fallback} ~/.ssh/ssh-agent.sock
+	fi
+
+	export SSH_AUTH_SOCK=~/.ssh/ssh-agent.sock
+	ssh-add -l
+}
+
+alias sshr='ssh_agent_reconnect'
+ssh_agent_reconnect
+
