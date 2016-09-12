@@ -810,7 +810,7 @@
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
-			<string>screen -DR login_screen</string>
+			<string>screen -DR laptop</string>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -1454,7 +1454,7 @@
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
-			<string>screen -DR login_screen</string>
+			<string>screen -DR devbox</string>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
