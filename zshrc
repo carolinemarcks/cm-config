@@ -116,3 +116,4 @@ config-diffs () {
 }
 
 source ~/projects/cm-config/zshrc_devbox
+# YOU ARE NOT ON THE MASTER BRANCH -- GO EDIT THERE 

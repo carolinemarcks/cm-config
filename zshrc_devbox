@@ -47,4 +47,3 @@ ssh_agent_reconnect () {
 
 alias sshr='ssh_agent_reconnect'
 ssh_agent_reconnect
-
