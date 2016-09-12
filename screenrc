@@ -1,5 +1,7 @@
 shell /bin/zsh
 shelltitle "$ |zsh"
 
+backtick 0 30 30 sh -c 'screen -ls | grep --color=no -o "$PPID[^[:space:]]*" | cut -d . -f 2'
+
 hardstatus alwayslastline
-hardstatus string '%{= KW}%{w}%S %{= Kw}| %-Lw%{= bW}%n%f %t%{-}%+Lw %=%{g}[%{w} %m/%d/%y %{g}]'
+hardstatus string '%{= KW}%{w}%` %{= Kw}| %-Lw%{= bW}%n%f %t%{-}%+Lw %=%{g}[%{w} %m/%d/%y %{g}]'
