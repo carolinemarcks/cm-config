@@ -2,4 +2,4 @@ shell /bin/zsh
 shelltitle "$ |zsh"
 
 hardstatus alwayslastline
-hardstatus string '%{= KW}%{w}%H %{= Kw}| %-Lw%{= bW}%n%f %t%{-}%+Lw %=%{g}[%{w} %m/%d/%y %{g}]'
+hardstatus string '%{= KW}%{w}%S %{= Kw}| %-Lw%{= bW}%n%f %t%{-}%+Lw %=%{g}[%{w} %m/%d/%y %{g}]'
