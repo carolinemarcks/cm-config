@@ -115,3 +115,4 @@ config-diffs () {
 	done
 }
 
+# ARE YOU ON THE MASTER BRANCH?
