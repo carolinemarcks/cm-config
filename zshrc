@@ -144,4 +144,16 @@ function custom_git_prompt_info() {
 	fi
 }
 
+# WORK 
+autoload -Uz compinit; compinit
+
+autoload -Uz bashcompinit; bashcompinit
+
+source ~/.bash_profile
+
+source ~/.bashrc
+
+GOPATH=~/go
+
 # ARE YOU ON THE MASTER BRANCH?
+
