@@ -144,10 +144,16 @@ function custom_git_prompt_info() {
 	fi
 }
 
+function laptopscreen () { screen -DR laptop }
+function vsscreen () { screen -DR vscode }
+function gpb () { git pull origin $(git rev-parse --abbrev-ref HEAD) }
+
 # WORK 
 autoload -Uz compinit; compinit
 
 autoload -Uz bashcompinit; bashcompinit
+
+function payup () { pay up }
 
 source ~/.bash_profile
 
