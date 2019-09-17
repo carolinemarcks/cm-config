@@ -145,10 +145,26 @@ function custom_git_prompt_info() {
 }
 
 function laptopscreen () { screen -DR laptop }
-function vsscreen () { screen -DR vscode }
 function gpb () { git pull origin $(git rev-parse --abbrev-ref HEAD) }
+function gbc () {
+	if (( $# == 1 ))
+	then
+		git checkout -b $USER-$1
+	else
+		echo "please provide a single branch name to create"
+	fi
+}
+function gcu () {
+	if (( $# == 1 ))
+	then
+		git checkout $USER-$1
+	else
+		echo "please provide a single branch name to checkout"
+	fi
+}
+function grbm () { git fetch origin master-passing-tests && git rebase origin/master-passing-tests }
 
-# WORK 
+# WORK
 autoload -Uz compinit; compinit
 
 autoload -Uz bashcompinit; bashcompinit
