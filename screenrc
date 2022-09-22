@@ -5,3 +5,5 @@ backtick 0 30 30 sh -c 'screen -ls | grep --color=no -o "$PPID[^[:space:]]*" | c
 
 hardstatus alwayslastline
 hardstatus string '%{= KW}%{w}%` %{= Kw}| %-Lw%{= bW}%n%f %t%{-}%+Lw %=%{g}[%{w} %m/%d/%y %{g}]'
+
+defscrollback 10000
